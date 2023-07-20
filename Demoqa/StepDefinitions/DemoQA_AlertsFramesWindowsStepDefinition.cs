@@ -87,6 +87,78 @@ namespace Demoqa.StepDefinitions
             alertsFramesWindowsPageObj.validatePromptAlertText(promptMessage);
         }
 
+        [When(@"We navigate to browser window tab")]
+        public void WhenWeNavigateToBrowserWindowTab()
+        {
+            alertsFramesWindowsPageObj.clickBrowserWindowTab();
+        }
+
+        [When(@"We click on new tab button")]
+        public void WhenWeClickOnNewTabButton()
+        {
+            alertsFramesWindowsPageObj.clickOnNewTabButton();
+        }
+
+        [When(@"We switch to new tab")]
+        public void WhenWeSwitchToNewTab()
+        {
+            alertsFramesWindowsPageObj.switchToNewTab();
+        }
+
+        [Then(@"We validate the new tab url and message")]
+        public void ThenWeValidateTheNewTabTitleAndMessage()
+        {
+            alertsFramesWindowsPageObj.validateNewTabTitle();
+        }
+
+
+        [Then(@"We close the new tab and switch back to original tab")]
+        public void ThenWeCloseTheNewTabAndSwitchBackToOriginalTab()
+        {
+            alertsFramesWindowsPageObj.closeNewTabAndSwitchToOriginal();
+        }
+
+        [Then(@"We click on new window button")]
+        public void ThenWeClickOnNewWindowButton()
+        {
+            alertsFramesWindowsPageObj.clickOnNewWindowButton();
+        }
+
+        [Then(@"We validate the new window message")]
+        public void ThenWeValidateTheNewWindowMessage()
+        {
+            alertsFramesWindowsPageObj.switchToNewWIndow();
+            alertsFramesWindowsPageObj.validateNewTabTitle();
+           
+        }
+
+        [Then(@"We close the new window and switch back to original window")]
+        public void ThenWeCloseTheNewWindowAndSwitchBackToOriginalWindow()
+        {
+            alertsFramesWindowsPageObj.closeNewWindow();
+        }
+
+        [Then(@"We click on message window button")]
+        public void ThenWeClickOnMessageWindowButton()
+        {
+            alertsFramesWindowsPageObj.clickOnMessageWindowButton();
+        }
+
+        [Then(@"We validate the message window message")]
+        public void ThenWeValidateTheMessageWindowMessage()
+        {
+            alertsFramesWindowsPageObj.switchToMessageWindow();
+            alertsFramesWindowsPageObj.validateMessageWindow();
+
+        }
+
+        [Then(@"We close the message window and switch back to original window")]
+        public void ThenWeCloseTheMessageWindowAndSwitchBackToOriginalWindow()
+        {
+            alertsFramesWindowsPageObj.closeNewWindow();
+        }
+
+
 
     }
 }

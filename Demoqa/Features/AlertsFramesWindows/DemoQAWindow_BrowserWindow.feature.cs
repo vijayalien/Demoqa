@@ -20,22 +20,22 @@ namespace Demoqa.Features.AlertsFramesWindows
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("To Test the Alert Frames & Windows Tab in DemoQA and check the Alerts Tab")]
-    public partial class ToTestTheAlertFramesWindowsTabInDemoQAAndCheckTheAlertsTabFeature
+    [NUnit.Framework.DescriptionAttribute("To Test the Brwoser Window Tab in DemoQA and check the window tab")]
+    public partial class ToTestTheBrwoserWindowTabInDemoQAAndCheckTheWindowTabFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private string[] _featureTags = ((string[])(null));
         
-#line 1 "DemoQAElement_Alerts.feature"
+#line 1 "DemoQAWindow_BrowserWindow.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/AlertsFramesWindows", "To Test the Alert Frames & Windows Tab in DemoQA and check the Alerts Tab", "A short summary of the feature", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/AlertsFramesWindows", "To Test the Brwoser Window Tab in DemoQA and check the window tab", "A short summary of the feature", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -74,21 +74,14 @@ namespace Demoqa.Features.AlertsFramesWindows
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Test the Alerts tab inside  Alert Frames & Windows Tab")]
+        [NUnit.Framework.DescriptionAttribute("Test the Window tab inside Alert Frames & Windows Tab")]
         [NUnit.Framework.CategoryAttribute("tag1")]
-        [NUnit.Framework.TestCaseAttribute("automation test", null)]
-        public virtual void TestTheAlertsTabInsideAlertFramesWindowsTab(string promptText, string[] exampleTags)
+        public virtual void TestTheWindowTabInsideAlertFramesWindowsTab()
         {
-            string[] @__tags = new string[] {
+            string[] tagsOfScenario = new string[] {
                     "tag1"};
-            if ((exampleTags != null))
-            {
-                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
-            }
-            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("Prompt text", promptText);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Test the Alerts tab inside  Alert Frames & Windows Tab", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Test the Window tab inside Alert Frames & Windows Tab", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -116,31 +109,28 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("We navigate to alert frames and windows tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 8
- testRunner.When("We navigate to alerts tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("We navigate to browser window tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 9
- testRunner.Then("We click on alert button and close the alert popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("We click on new tab button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 10
- testRunner.And("We click on delayed alert button and close the alert popup", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("We switch to new tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 11
- testRunner.And("We click on third alert box and perform confirm action", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("We validate the new tab url and message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 12
- testRunner.Then("We validate the ok message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("We close the new tab and switch back to original tab", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 13
- testRunner.And("We click on third alert box and perform cancel action", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("We click on new window button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 14
- testRunner.Then("We validate the cancel message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("We validate the new window message", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 15
- testRunner.And(string.Format("We click on prompt alert box and enter text {0}", promptText), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 16
- testRunner.Then(string.Format("we validate the prompt alert text {0}", promptText), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("We close the new window and switch back to original window", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

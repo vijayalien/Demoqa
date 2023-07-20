@@ -1,8 +1,8 @@
-﻿Feature: To Test the Alert Frames & Windows Tab in DemoQA and check the Alerts Tab
+﻿Feature: To Test the alerts Tab in DemoQA and check the alerts
 A short summary of the feature
 
 @tag1
-Scenario Outline: Test the Alerts tab inside  Alert Frames & Windows Tab
+Scenario Outline: Test the alerts picker inside alerts Tab
 	Given We open the browser and pass URL
 	When We navigate to alert frames and windows tab
 	When We navigate to alerts tab
