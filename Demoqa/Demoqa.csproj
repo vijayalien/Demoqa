@@ -12,10 +12,13 @@
     <SpecFlowObsoleteCodeBehindFiles Remove="Features\DemoQAElement - Copy.feature.cs" />
     <SpecFlowObsoleteCodeBehindFiles Remove="Features\Element\DemoQAElement_Buttons - Copy.feature.cs" />
     <SpecFlowObsoleteCodeBehindFiles Remove="Features\Element\DemoQAElement_WebTable - Copy.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Features\Interaction\DemoQAInteraction_Sortable - Copy.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Features\Interaction\DemoQAWidgets_ToolTip.feature.cs" />
     <SpecFlowObsoleteCodeBehindFiles Remove="Features\Widgets\DemoQAElement_Alerts.feature.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
     <PackageReference Include="ExtentReports" Version="4.1.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
     <PackageReference Include="Selenium.Support" Version="4.10.0" />
@@ -54,6 +57,12 @@
       <DesignTime>true</DesignTime>
       <AutoGen>true</AutoGen>
     </Compile>
+    <Compile Update="Features\Interaction\DemoQAInteraction_Droppable.feature.cs">
+      <DependentUpon>DemoQAInteraction_Droppable.feature</DependentUpon>
+    </Compile>
+    <Compile Update="Features\Interaction\DemoQAInteraction_Sortable.feature.cs">
+      <DependentUpon>DemoQAInteraction_Sortable.feature</DependentUpon>
+    </Compile>
     <Compile Update="Features\Widgets\DemoQAWidgets_DatePicker.feature.cs">
       <DependentUpon>DemoQAWidgets_DatePicker.feature</DependentUpon>
     </Compile>
@@ -84,6 +93,14 @@
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>
     <SpecFlowFeatureFiles Update="Features\Element\DemoQAElement_CheckBox.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\Interaction\DemoQAInteraction_Droppable.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Features\Interaction\DemoQAInteraction_Sortable.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>

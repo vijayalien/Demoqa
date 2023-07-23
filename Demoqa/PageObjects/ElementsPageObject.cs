@@ -107,6 +107,11 @@ namespace Demoqa.PageObjects
             driver.FindElement(webTables).Click();
         }
 
+        public void scrollIntoView(By element)
+        {
+            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", element);
+        }
+
         public void clickButtons()
         {
             validateElementTitle();
@@ -230,21 +235,22 @@ namespace Demoqa.PageObjects
         public void doubleClickButton()
         {
             Actions actions = new Actions(driver);
+            scrollIntoView(doubleClick);
             actions.DoubleClick(driver.FindElement(doubleClick)).Perform();
         }
         public void rightClickButton()
         {
             Actions actions = new Actions(driver);
+            scrollIntoView(rightClick);
             actions.ContextClick(driver.FindElement(rightClick)).Perform();
         }
 
         public void dynamicClickButton()
         {
             Thread.Sleep(3000);
+            scrollIntoView(singleClick);
             driver.FindElement(singleClick).Click();
         }
-
-
 
         public void validateDoubleClickMessage()
         {
