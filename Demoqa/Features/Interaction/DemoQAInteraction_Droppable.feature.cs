@@ -74,14 +74,14 @@ namespace Demoqa.Features.Interaction
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Test the droppable tab area inside interaction")]
+        [NUnit.Framework.DescriptionAttribute("Test the droppbale tab area inside interaction Tab")]
         [NUnit.Framework.CategoryAttribute("tag1")]
-        public virtual void TestTheDroppableTabAreaInsideInteraction()
+        public virtual void TestTheDroppbaleTabAreaInsideInteractionTab()
         {
             string[] tagsOfScenario = new string[] {
                     "tag1"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Test the droppable tab area inside interaction", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Test the droppbale tab area inside interaction Tab", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden

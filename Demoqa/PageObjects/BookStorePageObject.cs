@@ -20,6 +20,7 @@ using OpenQA.Selenium.Interactions;
 using System.Xml.Linq;
 using MongoDB.Driver.Core.Authentication;
 using System.Drawing;
+using SeleniumExtras.WaitHelpers;
 
 namespace Demoqa.PageObjects
 {
@@ -43,8 +44,11 @@ namespace Demoqa.PageObjects
         By lastName= By.Id("lastname");
         By userName= By.Id("userName");
         By password = By.Id("password");
-        By captchaChexBox = By.XPath("//span[@role='checkbox']");
+        By captchaChexBox = By.XPath("//div[@class='recaptcha-checkbox-border']");
         By register = By.Id("register");
+        By backToLogin = By.Id("gotologin");
+        By login = By.Id("login");
+        By userValue = By.Id("userName-value");
 
 
 
@@ -115,11 +119,57 @@ namespace Demoqa.PageObjects
             scrollIntoViewAndInput(lastName, lastname);
             scrollIntoViewAndInput(userName, username);
             scrollIntoViewAndInput(password, pass);
-            scrollIntoViewAndClick(captchaChexBox);
+            new WebDriverWait(driver, TimeSpan.FromSeconds(3)).Until(ExpectedConditions.FrameToBeAvailableAndSwitchToIt(By.XPath("//iframe[@title='reCAPTCHA']")));
+            driver.FindElement(captchaChexBox).Click();
+            Thread.Sleep(9000);
+            driver.SwitchTo().DefaultContent();
             scrollIntoViewAndClick(register);
         }
 
-        
+        public void clickBackToLogin()
+        {
+            scrollIntoViewAndClick(backToLogin);
+        }
+        public bool IsAlertPresent()
+        {
+            try
+            {
+                driver.SwitchTo().Alert();
+                return true;
+            }
+            catch (NoAlertPresentException)
+            {
+                return false;
+            }
 
+        }
+
+        public void acceptUserCreatedAlert()
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            wait.PollingInterval = TimeSpan.FromMilliseconds(500);
+            bool isAlertVisible = wait.Until(driver => IsAlertPresent());
+
+            if (isAlertVisible)
+            {
+                IAlert alert = driver.SwitchTo().Alert();
+                alert.Accept();
+            }
+        }
+
+
+        public void loginUsingExistingUser(String username, String pass)
+        {
+            scrollIntoViewAndInput(userName, username);
+            scrollIntoViewAndInput(password, pass);
+            scrollIntoViewAndClick(login);
+        }
+
+        public void validateLoginCreds(String user)
+        {
+            
+            wait.Until(ExpectedConditions.ElementIsVisible(userValue));
+            Assert.IsTrue(driver.FindElement(userValue).Text.Equals(user));
+        }
     }
 }

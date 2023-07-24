@@ -1,8 +1,8 @@
-﻿Feature: To Test the book store application Tab in DemoQA and test the login feature
+﻿Feature: To Test the interaction Tab in DemoQA and test the droppable feature
 
 
 @tag1
-Scenario: Test the login tab area inside book store application tab
+Scenario: Test the droppbale tab area inside interaction Tab
 	Given We navigate to interaction tab
 	When We click on droppable tab
 	Then We drag and drop the element inside simple tab

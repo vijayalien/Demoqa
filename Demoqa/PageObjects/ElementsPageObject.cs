@@ -86,6 +86,14 @@ namespace Demoqa.PageObjects
             });
              
         }
+
+        public void scrollIntoViewAndClick(By element)
+        {
+            IWebElement el = driver.FindElement(element);
+
+            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", el);
+            el.Click();
+        }
         public void clickCheckBox()
         {
             validateElementTitle();
@@ -209,14 +217,11 @@ namespace Demoqa.PageObjects
 
                         Thread.Sleep(2000);
 
-                        // Find the  name input field within the modal
                         var valueInput = driver.FindElement(By.XPath("//input[@value='"+tableValue+"']"));
 
-                        // Clear the existing value and enter a new first name
                         valueInput.Clear();
                         valueInput.SendKeys(newValue);
 
-                        // Find the submit button within the modal
                         driver.FindElement(webTableSubmitButton).Click();
                         
                         break;
@@ -235,21 +240,22 @@ namespace Demoqa.PageObjects
         public void doubleClickButton()
         {
             Actions actions = new Actions(driver);
-            scrollIntoView(doubleClick);
+            // scrollIntoView(doubleClick);
+            Thread.Sleep(3000);
             actions.DoubleClick(driver.FindElement(doubleClick)).Perform();
         }
         public void rightClickButton()
         {
             Actions actions = new Actions(driver);
-            scrollIntoView(rightClick);
+            Thread.Sleep(3000);
             actions.ContextClick(driver.FindElement(rightClick)).Perform();
         }
 
         public void dynamicClickButton()
         {
             Thread.Sleep(3000);
-            scrollIntoView(singleClick);
-            driver.FindElement(singleClick).Click();
+            scrollIntoViewAndClick(singleClick);
+            //driver.FindElement(singleClick).Click();
         }
 
         public void validateDoubleClickMessage()
