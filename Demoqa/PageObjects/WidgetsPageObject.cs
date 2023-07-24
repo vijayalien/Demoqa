@@ -182,15 +182,7 @@ namespace Demoqa.PageObjects
             scrollIntoView(autoCompleteSingoleContainer);
             String text = driver.FindElement(autoCompleteSingoleContainer).Text;
 
-
-            if (text.Contains(capitalizedColorName))
-            {
-                Assert.Pass("The provided color is available");
-            }
-            else
-            {
-                Assert.Fail("The provided color is not available");
-            }
+            Assert.IsTrue(text.Contains(capitalizedColorName),"The provided color is not available");
 
         }
 
