@@ -11,14 +11,12 @@ using System.Threading.Tasks;
 
 namespace Demoqa.PageObjects
 {
-    public class ElementsPageObject
+    public class ElementsPageObject : BasePageObject
     {
-        private IWebDriver driver;
-        private WebDriverWait wait;
-        public ElementsPageObject(IWebDriver driver)
+       
+        public ElementsPageObject(IWebDriver driver): base(driver)
         {
-            this.driver = driver;
-            this.wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+           
         }
 
         By searchTextbox = By.XPath("(//div[@class='card-up'])[1]");
@@ -62,71 +60,43 @@ namespace Demoqa.PageObjects
 
         public void clickOnElementsTab()
         {
-            Thread.Sleep(10000);
-            driver.FindElement(searchTextbox).Click();
-        }
-        public void WaitForPageToLoad()
-        {
-            wait.Until(d => ((IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete"));
-        }
-        public void validateElementTitle()
-        {
             WaitForPageToLoad();
-            wait.Until(driver =>
-            {
-                try
-                {
-                    IWebElement element = driver.FindElement(elementsHeader);
-                    return element.Displayed;
-                }
-                catch (NoSuchElementException)
-                {
-                    return false;
-                }
-            });
-             
+            scrollIntoViewAndClick(searchTextbox);
         }
-
-        public void scrollIntoViewAndClick(By element)
+     
+        public void validateEleTitle()
         {
-            IWebElement el = driver.FindElement(element);
-
-            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", el);
-            el.Click();
+            validateElementTitle(elementsHeader);
         }
+
         public void clickCheckBox()
         {
-            validateElementTitle();
+            validateEleTitle();
 
-            driver.FindElement(checkBox).Click();
+            scrollIntoViewAndClick(checkBox);
 
         }
 
         public void clickTextBox()
         {
-            validateElementTitle();
+            validateEleTitle();
 
-            driver.FindElement(textBox).Click();
+            scrollIntoViewAndClick(textBox);
         }
 
         public void clickWebTables()
         {
-            validateElementTitle();
-            driver.FindElement(webTables).Click();
+            validateEleTitle();
+            scrollIntoViewAndClick(webTables);
         }
 
-        public void scrollIntoView(By element)
-        {
-            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", element);
-        }
-
+       
         public void clickButtons()
         {
-            validateElementTitle();
+            validateEleTitle();
+            scrollIntoView(buttons);
             
             IWebElement buttonTab = driver.FindElement(buttons);
-
-            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", buttonTab);
 
             buttonTab.Click();
 
@@ -134,12 +104,10 @@ namespace Demoqa.PageObjects
 
         public void clickUploadDownloadTab()
         {
-            validateElementTitle();
+            validateEleTitle();
 
             IWebElement uploadDownTab = driver.FindElement(uploadDownloadTab);
-
-            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", uploadDownTab);
-
+            scrollIntoView(uploadDownloadTab);
             uploadDownTab.Click();
 
         }
@@ -147,10 +115,10 @@ namespace Demoqa.PageObjects
         public void fillTextBox()
         {
            
-            driver.FindElement(fullName).SendKeys("Testing");
-            driver.FindElement(email).SendKeys("Automation@test.com");
-            driver.FindElement(currentAddress).SendKeys("Melbourne");
-            driver.FindElement(permanentAddress).SendKeys("Melbourne City");
+            scrollIntoViewAndInput(fullName,"Testing");
+            scrollIntoViewAndInput(email,"Automation@test.com");
+            scrollIntoViewAndInput(currentAddress,"Melbourne");
+            scrollIntoViewAndInput(permanentAddress,"Melbourne City");
 
         }
 
@@ -158,11 +126,7 @@ namespace Demoqa.PageObjects
         {
             By buttonLocator = By.Id("submit");
             IWebElement button = driver.FindElement(buttonLocator);
-
-            // Scroll the page to bring the button into view
-            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", button);
-
-            // Click the button
+            scrollIntoView(By.Id("submit"));
             button.Click();
         
         }
@@ -177,12 +141,13 @@ namespace Demoqa.PageObjects
         {
             if (!driver.FindElement(homeCheckBox).Selected)
             {
-                driver.FindElement(homeCheckBox).Click();
+                scrollIntoViewAndClick(homeCheckBox);
             }
         }
 
         public void validateCheckBoxResults()
         {
+            WaitForElementToBeVisible(checkBoxResults);
             Assert.True(driver.FindElement(checkBoxResults).Displayed);
         }
 
@@ -222,7 +187,7 @@ namespace Demoqa.PageObjects
                         valueInput.Clear();
                         valueInput.SendKeys(newValue);
 
-                        driver.FindElement(webTableSubmitButton).Click();
+                        scrollIntoViewAndClick(webTableSubmitButton);
                         
                         break;
                     }
@@ -283,7 +248,7 @@ namespace Demoqa.PageObjects
 
         public void clickOnDownloadButton()
         {
-            driver.FindElement(downloadButton).Click();
+            scrollIntoViewAndClick(downloadButton);
 
         }
 

@@ -20,15 +20,13 @@ using OpenQA.Selenium.Interactions;
 
 namespace Demoqa.PageObjects
 {
-    public class WidgetsPageObject
+    public class WidgetsPageObject : BasePageObject
     {
-        private IWebDriver driver;
-        private WebDriverWait wait;
+      
 
-        public WidgetsPageObject(IWebDriver driver)
+        public WidgetsPageObject(IWebDriver driver) : base(driver)
         {
-            this.driver = driver;
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+          
         }
 
         //Auto Complete
@@ -58,63 +56,27 @@ namespace Demoqa.PageObjects
             WaitForPageToLoad();
             scrollIntoViewAndClick(widgetsTab);
         }
-        public void WaitForPageToLoad()
+
+        public void validateEleTitle()
         {
-            wait.Until(d => ((IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete"));
-        }
-        public void validateElementTitle()
-        {
-            WaitForPageToLoad();
-            wait.Until(driver =>
-            {
-                try
-                {
-                    IWebElement element = driver.FindElement(mainPageHeader);
-                    return element.Displayed;
-                }
-                catch (NoSuchElementException)
-                {
-                    return false;
-                }
-            });
-
-        }
-
-        public void scrollIntoViewAndClick(By element)
-        {
-            IWebElement el = driver.FindElement(element);
-
-            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", el);
-            el.Click();
-        }
-
-        public void scrollIntoView(By element)
-        {
-            IWebElement el = driver.FindElement(element);
-
-            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", el);
-        }
-
-        public void scrollIntoViewAndInput(By element,String input)
-        {
-            IWebElement el = driver.FindElement(element);
-
-            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", el);
-            el.SendKeys(input);
+            validateElementTitle(mainPageHeader);
         }
 
         public void clickOnAutoCompleteTab()
         {
+            validateEleTitle();
             scrollIntoViewAndClick(autoCompleteTab);
         }
 
         public void clickOnToolTipTab()
         {
+            validateEleTitle();
             scrollIntoViewAndClick(toolTipTab);
         }
 
         public void clickOnDatePickerTab()
         {
+            validateEleTitle();
             scrollIntoViewAndClick(datePickerTab);
         }
 

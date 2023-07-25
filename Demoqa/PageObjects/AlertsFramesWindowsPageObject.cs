@@ -19,15 +19,12 @@ using OpenQA.Selenium.Support.Extensions;
 
 namespace Demoqa.PageObjects
 {
-    public class AlertsFramesWindowsPageObject
+    public class AlertsFramesWindowsPageObject : BasePageObject
     {
-        private IWebDriver driver;
-        private WebDriverWait wait;
         private string mainWindowHandle = null;
-        public AlertsFramesWindowsPageObject(IWebDriver driver)
+        public AlertsFramesWindowsPageObject(IWebDriver driver) : base(driver)
         {
-            this.driver = driver;
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+           
         }
 
         //Alert
@@ -52,42 +49,23 @@ namespace Demoqa.PageObjects
 
         public void clickOnAlertsFramesWindowsTab()
         {
-            Thread.Sleep(8000);
-            driver.FindElement(alertsFramesWindowsTab).Click();
+            WaitForPageToLoad();
+            scrollIntoViewAndClick(alertsFramesWindowsTab);
+           
         }
         public void WaitForPageToLoad()
         {
             wait.Until(d => ((IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete"));
         }
-        public void validateElementTitle()
+        public void validateEleTitle()
         {
-            WaitForPageToLoad();
-            wait.Until(driver =>
-            {
-                try
-                {
-                    IWebElement element = driver.FindElement(mainPageHeader);
-                    return element.Displayed;
-                }
-                catch (NoSuchElementException)
-                {
-                    return false;
-                }
-            });
+            validateElementTitle(mainPageHeader);
 
-        }
-
-        public void scrollIntoViewAndClick(By element)
-        {
-           IWebElement el = driver.FindElement(element);
-
-            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", el);
-            el.Click();
         }
 
         public void clickAlertTab()
         {
-            validateElementTitle();
+            validateEleTitle();
 
             scrollIntoViewAndClick(alertsTab);
 
@@ -95,7 +73,7 @@ namespace Demoqa.PageObjects
 
         public void clickBrowserWindowTab()
         {
-            validateElementTitle();
+            validateEleTitle();
 
             scrollIntoViewAndClick(browserWindowTab);
 
@@ -109,28 +87,12 @@ namespace Demoqa.PageObjects
             alert.Accept();
         }
 
-        public bool IsAlertPresent()
-        {
-            try
-            {
-                driver.SwitchTo().Alert();
-                return true;
-            }
-            catch (NoAlertPresentException)
-            {
-                return false;
-            }
-            
-        }
-
-       
-
         public void clickAndAcceptDelayedAlertButton()
         {
 
             scrollIntoViewAndClick(delayedAlertButton);
 
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.PollingInterval = TimeSpan.FromMilliseconds(500);
             bool isAlertVisible = wait.Until(driver => IsAlertPresent());
 

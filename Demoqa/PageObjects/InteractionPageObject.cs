@@ -21,15 +21,12 @@ using System.Xml.Linq;
 
 namespace Demoqa.PageObjects
 {
-    public class InteractionPageObject
+    public class InteractionPageObject : BasePageObject
     {
-        private IWebDriver driver;
-        private WebDriverWait wait;
 
-        public InteractionPageObject(IWebDriver driver)
+        public InteractionPageObject(IWebDriver driver) : base(driver)
         {
-            this.driver = driver;
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            
         }
 
         //Sortable
@@ -56,59 +53,23 @@ namespace Demoqa.PageObjects
             WaitForPageToLoad();
             scrollIntoViewAndClick(interactionTab);
         }
-        public void WaitForPageToLoad()
+       
+        public void validateEleTitle()
         {
-            wait.Until(d => ((IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete"));
-        }
-        public void validateElementTitle()
-        {
-            WaitForPageToLoad();
-            wait.Until(driver =>
-            {
-                try
-                {
-                    IWebElement element = driver.FindElement(mainPageHeader);
-                    return element.Displayed;
-                }
-                catch (NoSuchElementException)
-                {
-                    return false;
-                }
-            });
-
-        }
-
-        public void scrollIntoViewAndClick(By element)
-        {
-            IWebElement el = driver.FindElement(element);
-
-            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", el);
-            el.Click();
-        }
-
-        public void scrollIntoView(By element)
-        {
-            IWebElement el = driver.FindElement(element);
-
-            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", el);
-        }
-
-        public void scrollIntoViewAndInput(By element,String input)
-        {
-            IWebElement el = driver.FindElement(element);
-
-            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", el);
-            el.SendKeys(input);
+            validateElementTitle(mainPageHeader);
         }
 
         public void clickOnSortableTab()
         {
+            validateEleTitle();
             scrollIntoViewAndClick(sortableTab);
         }
 
         public void clickOnDroppableTab() {
+            validateEleTitle();
             scrollIntoViewAndClick(dropabbleTab);
-                }
+        }
+
 
         public void sortListItems()
         {
@@ -163,7 +124,7 @@ namespace Demoqa.PageObjects
 
         public void clickAcceptTabDragAndDrop()
         {
-            driver.FindElement(acceptDragAndDropTab).Click();
+            scrollIntoViewAndClick(acceptDragAndDropTab);
 
         }
 

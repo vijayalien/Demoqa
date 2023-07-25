@@ -24,15 +24,13 @@ using SeleniumExtras.WaitHelpers;
 
 namespace Demoqa.PageObjects
 {
-    public class BookStorePageObject
+    public class BookStorePageObject : BasePageObject
     {
-        private IWebDriver driver;
-        private WebDriverWait wait;
-
-        public BookStorePageObject(IWebDriver driver)
+      
+        public BookStorePageObject(IWebDriver driver) : base(driver)
         {
-            this.driver = driver;
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            //this.driver = driver;
+            //wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
         }
 
         //Login
@@ -57,53 +55,16 @@ namespace Demoqa.PageObjects
             WaitForPageToLoad();
             scrollIntoViewAndClick(bookStoreApplicationTab);
         }
-        public void WaitForPageToLoad()
+       
+        public void validateTitle()
         {
-            wait.Until(d => ((IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete"));
-        }
-        public void validateElementTitle()
-        {
-            WaitForPageToLoad();
-            wait.Until(driver =>
-            {
-                try
-                {
-                    IWebElement element = driver.FindElement(mainPageHeader);
-                    return element.Displayed;
-                }
-                catch (NoSuchElementException)
-                {
-                    return false;
-                }
-            });
+            validateElementTitle(mainPageHeader);
 
-        }
-
-        public void scrollIntoViewAndClick(By element)
-        {
-            IWebElement el = driver.FindElement(element);
-
-            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", el);
-            el.Click();
-        }
-
-        public void scrollIntoView(By element)
-        {
-            IWebElement el = driver.FindElement(element);
-
-            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", el);
-        }
-
-        public void scrollIntoViewAndInput(By element,String input)
-        {
-            IWebElement el = driver.FindElement(element);
-
-            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", el);
-            el.SendKeys(input);
         }
 
         public void clickOnLoginTab()
         {
+            validateTitle();
             scrollIntoViewAndClick(loginTab);
         }
 
@@ -130,23 +91,11 @@ namespace Demoqa.PageObjects
         {
             scrollIntoViewAndClick(backToLogin);
         }
-        public bool IsAlertPresent()
-        {
-            try
-            {
-                driver.SwitchTo().Alert();
-                return true;
-            }
-            catch (NoAlertPresentException)
-            {
-                return false;
-            }
-
-        }
+       
 
         public void acceptUserCreatedAlert()
         {
-            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.PollingInterval = TimeSpan.FromMilliseconds(500);
             bool isAlertVisible = wait.Until(driver => IsAlertPresent());
 
@@ -167,8 +116,7 @@ namespace Demoqa.PageObjects
 
         public void validateLoginCreds(String user)
         {
-            
-            wait.Until(ExpectedConditions.ElementIsVisible(userValue));
+            WaitForElementToBeVisible(userValue);
             Assert.IsTrue(driver.FindElement(userValue).Text.Equals(user));
         }
     }
